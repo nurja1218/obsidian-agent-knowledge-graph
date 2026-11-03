@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" width="760" height="330" role="img" aria-label="typed-edge 지식그래프 예시">
+
+<style>
+  :root { --bg:#ffffff; --fg:#1f2328; --muted:#59636e; --line:#8c959f; --box:#f6f8fa;
+          --new:#e6f4ea; --newline:#2f855a; --warn:#fff4e5; --warnline:#b7791f; --group:#fbfbfc; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0d1117; --fg:#e6edf3; --muted:#9198a1; --line:#6e7681; --box:#161b22;
+            --new:#12261b; --newline:#3fb950; --warn:#2a1f0d; --warnline:#d29922; --group:#10151c; }
+  }
+  .bg { fill: var(--bg); }
+  .grp { fill: var(--group); stroke: var(--line); stroke-dasharray: 4 4; }
+  .grpt { fill: var(--muted); font-size: 12px; font-weight: 600; }
+  .box { fill: var(--box); stroke: var(--line); }
+  .new { fill: var(--new); stroke: var(--newline); }
+  .warn { fill: var(--warn); stroke: var(--warnline); }
+  .t { fill: var(--fg); font-size: 13px; }
+  .s { fill: var(--muted); font-size: 11px; }
+  .title { fill: var(--fg); font-size: 14px; font-weight: 700; }
+  .e { stroke: var(--line); stroke-width: 1.4; fill: none; marker-end: url(#a); }
+  .ed { stroke: var(--line); stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; marker-end: url(#a); }
+  .el { fill: var(--muted); font-size: 11px; }
+  .ah { fill: var(--line); }
+  text { font-family: Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; }
+</style>
+
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<rect class="bg" width="760" height="330"/>
+<path class="e" d="M190.0,146.0 L260.0,146.0"/>
+<text class="el" x="225.0" y="138.0" text-anchor="middle">superseded-by</text>
+<path class="e" d="M450.0,146.0 L545.0,146.0"/>
+<text class="el" x="497.5" y="138.0" text-anchor="middle">depends-on</text>
+<path class="e" d="M309.0,172.0 L171.0,250.0"/>
+<text class="el" x="226.0" y="209.0" text-anchor="middle">depends-on</text>
+<path class="e" d="M285.0,276.0 L220.0,276.0"/>
+<text class="el" x="252.5" y="268.0" text-anchor="middle">depends-on</text>
+<path class="e" d="M535.0,276.0 L455.0,276.0"/>
+<text class="el" x="495.0" y="268.0" text-anchor="middle">depends-on</text>
+<path class="e" d="M581.0,250.0 L411.5,172.0"/>
+<text class="el" x="526.2" y="213.0" text-anchor="middle">depends-on</text>
+<path class="ed" d="M426.0,120.0 L579.0,64.0"/>
+<rect class="warn" x="270" y="12" width="200" height="52" rx="8"/>
+<text class="t" x="370.0" y="34.0" text-anchor="middle">payments (MOC 허브)</text>
+<text class="s" x="370.0" y="50.0" text-anchor="middle">moc 링크 5개 · Bases 표</text>
+<rect class="box" x="560" y="12" width="180" height="52" rx="8"/>
+<text class="t" x="650.0" y="34.0" text-anchor="middle">feature/checkout-v2</text>
+<text class="s" x="650.0" y="50.0" text-anchor="middle">implements → 코드</text>
+<rect class="box" x="20" y="120" width="170" height="52" rx="8"/>
+<text class="t" x="105.0" y="142.0" text-anchor="middle">결제 API v1 명세</text>
+<text class="s" x="105.0" y="158.0" text-anchor="middle">status: superseded</text>
+<rect class="new" x="260" y="120" width="190" height="52" rx="8"/>
+<text class="t" x="355.0" y="142.0" text-anchor="middle">결제 API v2 명세</text>
+<text class="s" x="355.0" y="158.0" text-anchor="middle">현재 기준</text>
+<rect class="box" x="545" y="120" width="195" height="52" rx="8"/>
+<text class="t" x="642.5" y="142.0" text-anchor="middle">주문 상태 전이</text>
+<text class="s" x="642.5" y="158.0" text-anchor="middle">다른 도메인 (orders)</text>
+<rect class="box" x="30" y="250" width="190" height="52" rx="8"/>
+<text class="t" x="125.0" y="272.0" text-anchor="middle">멱등 키 도입 결정</text>
+<text class="s" x="125.0" y="288.0" text-anchor="middle">type: decision</text>
+<rect class="box" x="285" y="250" width="170" height="52" rx="8"/>
+<text class="t" x="370.0" y="280.0" text-anchor="middle">웹훅 재시도 런북</text>
+<rect class="box" x="535" y="250" width="205" height="52" rx="8"/>
+<text class="t" x="637.5" y="272.0" text-anchor="middle">중복 결제 장애 기록</text>
+<text class="s" x="637.5" y="288.0" text-anchor="middle">type: incident</text>
+</svg>
