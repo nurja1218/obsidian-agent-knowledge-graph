@@ -3,7 +3,7 @@
 Obsidian vault 의 마크다운 노트를 **AI 에이전트가 따라가고 질의할 수 있는 typed-edge 지식그래프**로 쓰는 규약과 도구입니다.
 2026년 5월부터 매일 쓰는 개인 vault(노트 약 1,400개)에서 회사·개인 내용을 빼고 구조·규칙·도구만 남겼습니다.
 
-![예시 그래프](docs/knowledge-graph.svg)
+> ⚠ 구조 설명과 그림을 실제 vault 기준으로 다시 쓰는 중입니다 (2026-11-03).
 
 ## 왜
 
@@ -28,7 +28,7 @@ Obsidian 그래프는 흩어진 점이었고, 무엇보다 **에이전트는 그
 - **없는 관계를 지어내지 않는다.** `depends-on`·`superseded-by` 는 기계가 추론하지 않고, 에이전트가 노트를 읽고 직접 적는다.
 - 새 노트가 자동으로 편입되게 전역 규칙과 노트 작성 스킬에 이 frontmatter 를 박아 둔다 — 규약만 두면 고아가 다시 쌓인다.
 
-스키마·템플릿: [schema/SCHEMA.md](schema/SCHEMA.md) · [examples/vault](examples/vault)
+스키마·템플릿: [schema/SCHEMA.md](schema/SCHEMA.md)
 
 ## 질의·점검 도구
 
@@ -39,18 +39,6 @@ python3 tools/graph.py stats   <vault>                      # 노드·엣지·�
 python3 tools/graph.py query   <vault> --domain payments    # 도메인 노트 + depends-on 으로 끌려오는 노트, 대체된 노트 표시
 python3 tools/graph.py current <vault> 2026-01-10-checkout-v1-spec   # superseded-by 를 따라 현재 기준 노트
 python3 tools/graph.py lint    <vault>                      # 끊긴 엣지 · 판정 불가 · related 사용 · 대체 순환
-```
-
-예제 vault 에서 `query --domain payments`:
-
-```
-- .../2026-01-20-idempotency-key-decision  [accepted]
-- .../2026-03-02-checkout-v2-spec  [completed]
-    depends-on .../2026-01-20-idempotency-key-decision
-    depends-on .../orders/order-state-machine
-    implements feature/checkout-v2 @ 3f2a91c
-- .../2026-01-10-checkout-v1-spec  [superseded]  ⤳ superseded, current = .../2026-03-02-checkout-v2-spec
-+ .../orders/order-state-machine  (pulled in by .../2026-03-02-checkout-v2-spec)
 ```
 
 같은 이름의 노트가 여러 폴더에 있으면 `moc` 엣지는 허브를, 나머지는 링크를 건 노트와 경로가 가장 가까운 쪽을 고르고, 그래도 동률이면 "판정 불가"로 남긴다.
@@ -85,4 +73,4 @@ python3 tools/graph.py lint    <vault>                      # 끊긴 엣지 · �
 - 엣지를 자동으로 만들지 않는다(의도). 엣지 품질은 노트를 쓰는 쪽의 규칙 준수에 달려 있다.
 - Bases 자동 표는 Obsidian 화면용이다 — 에이전트는 `graph.py` 나 frontmatter 를 직접 읽는다.
 
-회사 코드·내부 문서·서비스 이름은 들어 있지 않습니다. 예제 vault 는 가상의 결제 도메인으로 새로 만들었습니다.
+회사 코드·내부 문서·서비스 이름은 들어 있지 않습니다.
