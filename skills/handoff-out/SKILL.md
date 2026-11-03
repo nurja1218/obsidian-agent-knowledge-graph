@@ -68,6 +68,7 @@ grep -ril "<식별 키워드>" "$VAULT/projects/" | head
 3. typed-edge 부착: `domain` / `moc` / `depends-on` / `implements` (관계 이유를 1줄로 못 적으면 엣지를 만들지 마라)
 4. 이번 작업이 기존 문서를 대체하면 **구 문서에 `superseded-by`** 를 단다 — 다음 세션이 낡은 절차를 따르는 걸 막는다
 5. 상대 날짜 금지. 절대 날짜로 쓴다
+6. 기록을 마치면 `python3 ~/.claude/tools/graph/graph.py lint <vault>` — 이번에 쓴 노트 때문에 생긴 문제(끊긴 엣지 · 판정 불가 · `related`)가 0건인지 확인하고, 있으면 고친다
 
 ## Step 3: 메모리 갱신
 

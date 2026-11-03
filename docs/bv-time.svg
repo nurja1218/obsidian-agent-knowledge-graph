@@ -49,18 +49,18 @@
 <text class="t" x="670.0" y="67.0" text-anchor="middle">인계 10-17</text>
 <text class="s" x="670.0" y="83.0" text-anchor="middle">체인 끝 = 현재 상태</text>
 <rect class="warn" x="15" y="180" width="180" height="64" rx="8"/>
-<text class="t" x="105.0" y="200.0" text-anchor="middle">도메인 허브 (MOC) 49</text>
-<text class="s" x="105.0" y="216.0" text-anchor="middle">moc 링크 663</text>
+<text class="t" x="105.0" y="200.0" text-anchor="middle">도메인 허브 (MOC) 66</text>
+<text class="s" x="105.0" y="216.0" text-anchor="middle">moc 링크 828</text>
 <text class="s" x="105.0" y="232.0" text-anchor="middle">Bases: domain 으로 자동 표</text>
 <rect class="box" x="260" y="170" width="230" height="84" rx="8"/>
-<text class="t" x="375.0" y="192.0" text-anchor="middle">작업 노트 895</text>
+<text class="t" x="375.0" y="192.0" text-anchor="middle">작업 노트 913</text>
 <text class="s" x="375.0" y="208.0" text-anchor="middle">domain · status · created · tags</text>
 <text class="s" x="375.0" y="224.0" text-anchor="middle">status: draft → active → done → archived</text>
 <text class="s" x="375.0" y="240.0" text-anchor="middle">날짜로 시작하는 파일 232</text>
 <rect class="box" x="560" y="150" width="185" height="52" rx="8"/>
-<text class="t" x="652.5" y="172.0" text-anchor="middle">depends-on 885</text>
+<text class="t" x="652.5" y="172.0" text-anchor="middle">depends-on 925</text>
 <text class="s" x="652.5" y="188.0" text-anchor="middle">읽을 때 같이 읽을 노트</text>
 <rect class="box" x="560" y="225" width="185" height="52" rx="8"/>
-<text class="t" x="652.5" y="247.0" text-anchor="middle">implements 455</text>
+<text class="t" x="652.5" y="247.0" text-anchor="middle">implements 456</text>
 <text class="s" x="652.5" y="263.0" text-anchor="middle">노트 ↔ 브랜치·커밋</text>
 </svg>

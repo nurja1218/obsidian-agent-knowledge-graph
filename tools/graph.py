@@ -15,14 +15,17 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from collections import defaultdict
 from pathlib import Path
 
 SKIP_DIRS = {".git", ".obsidian", "node_modules", ".trash"}
+DEFAULT_EXCLUDE = "claude-config,.work"   # agent config and scratch — not knowledge notes
 EDGE_KEYS = ("moc", "depends-on", "superseded-by")
 WIKILINK = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]")
+MDLINK = re.compile(r"\]\(<?([^)#<>\s]+\.md)>?(?:#[^)]*)?\)")   # [title](note.md) — Obsidian treats it as a link too
 NULLS = {"", "null", "~", "none"}
 
 
@@ -85,16 +88,24 @@ def links_in(value) -> list[str]:
 
 
 class Vault:
-    def __init__(self, root: Path):
+    def __init__(self, root: Path, exclude: str = DEFAULT_EXCLUDE):
         self.root = root
+        excluded = {e.strip().strip("/") for e in exclude.split(",") if e.strip()}
         self.notes: dict[str, dict] = {}          # relpath (no .md) -> note
         self.by_stem: dict[str, list[str]] = defaultdict(list)
         for p in sorted(root.rglob("*.md")):
-            if SKIP_DIRS & set(p.relative_to(root).parts):
+            parts = p.relative_to(root).parts
+            if SKIP_DIRS & set(parts) or any("/".join(parts).startswith(e + "/") for e in excluded):
                 continue
             fm, body = parse_frontmatter(p.read_text(encoding="utf-8", errors="ignore"))
             rel = p.relative_to(root).with_suffix("").as_posix()
-            self.notes[rel] = {"id": rel, "fm": fm, "body_links": links_in(body)}
+            md = []
+            for m in MDLINK.finditer(body):
+                t = m.group(1)
+                if "://" in t:
+                    continue
+                md.append(os.path.normpath(os.path.join(os.path.dirname(rel), t)).removesuffix(".md"))
+            self.notes[rel] = {"id": rel, "fm": fm, "body_links": links_in(body) + md}
             self.by_stem[p.stem].append(rel)
         self.edges: list[tuple[str, str, str]] = []  # (src, kind, raw target)
         for rel, n in self.notes.items():
@@ -116,6 +127,10 @@ class Vault:
             hubs = [c for c in cands if self.is_moc(c)]
             cands = hubs or cands
         if len(cands) > 1 and src:
+            same_dir = [c for c in cands if c.rsplit("/", 1)[0] == src.rsplit("/", 1)[0]]
+            if len(same_dir) == 1:
+                return same_dir[0], "ok"
+
             def shared(c: str) -> int:
                 a, b = src.split("/")[:-1], c.split("/")[:-1]
                 n = 0
@@ -233,8 +248,9 @@ def main() -> None:
     ap.add_argument("--depth", type=int, default=1)
     ap.add_argument("--limit", type=int, default=5)
     ap.add_argument("--json", action="store_true")
+    ap.add_argument("--exclude", default=DEFAULT_EXCLUDE, help="comma-separated top folders to skip (default: %(default)s)")
     a = ap.parse_args()
-    v = Vault(a.vault.resolve())
+    v = Vault(a.vault.resolve(), a.exclude)
 
     if a.command == "stats":
         out = cmd_stats(v)
